@@ -1,0 +1,3 @@
+/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles/sorting-demo_run.dir
+/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles/edit_cache.dir
+/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles/rebuild_cache.dir
