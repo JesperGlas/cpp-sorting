@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/jesper/dev/cpp/cpp-sorting/src/LinkedList.cpp" "CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o" "gcc" "CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o.d"
   "/home/jesper/dev/cpp/cpp-sorting/src/main.cpp" "CMakeFiles/sorting-demo_run.dir/src/main.cpp.o" "gcc" "CMakeFiles/sorting-demo_run.dir/src/main.cpp.o.d"
-  "/home/jesper/dev/cpp/cpp-sorting/src/sorting.cpp" "CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o" "gcc" "CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o.d"
   )
 
 # Targets to which this target links.

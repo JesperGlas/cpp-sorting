@@ -129,6 +129,30 @@ sorting-demo_run/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/build
 .PHONY : sorting-demo_run/fast
 
+src/LinkedList.o: src/LinkedList.cpp.o
+.PHONY : src/LinkedList.o
+
+# target to build an object file
+src/LinkedList.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o
+.PHONY : src/LinkedList.cpp.o
+
+src/LinkedList.i: src/LinkedList.cpp.i
+.PHONY : src/LinkedList.i
+
+# target to preprocess a source file
+src/LinkedList.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.i
+.PHONY : src/LinkedList.cpp.i
+
+src/LinkedList.s: src/LinkedList.cpp.s
+.PHONY : src/LinkedList.s
+
+# target to generate assembly for a file
+src/LinkedList.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.s
+.PHONY : src/LinkedList.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -153,30 +177,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/sorting.o: src/sorting.cpp.o
-.PHONY : src/sorting.o
-
-# target to build an object file
-src/sorting.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o
-.PHONY : src/sorting.cpp.o
-
-src/sorting.i: src/sorting.cpp.i
-.PHONY : src/sorting.i
-
-# target to preprocess a source file
-src/sorting.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.i
-.PHONY : src/sorting.cpp.i
-
-src/sorting.s: src/sorting.cpp.s
-.PHONY : src/sorting.s
-
-# target to generate assembly for a file
-src/sorting.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.s
-.PHONY : src/sorting.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... sorting-demo_run"
+	@echo "... src/LinkedList.o"
+	@echo "... src/LinkedList.i"
+	@echo "... src/LinkedList.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/sorting.o"
-	@echo "... src/sorting.i"
-	@echo "... src/sorting.s"
 .PHONY : help
 
 

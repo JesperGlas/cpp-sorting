@@ -69,10 +69,24 @@ include CMakeFiles/sorting-demo_run.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/sorting-demo_run.dir/flags.make
 
+CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o: CMakeFiles/sorting-demo_run.dir/flags.make
+CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o: ../src/LinkedList.cpp
+CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o: CMakeFiles/sorting-demo_run.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o -MF CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o.d -o CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o -c /home/jesper/dev/cpp/cpp-sorting/src/LinkedList.cpp
+
+CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jesper/dev/cpp/cpp-sorting/src/LinkedList.cpp > CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.i
+
+CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jesper/dev/cpp/cpp-sorting/src/LinkedList.cpp -o CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.s
+
 CMakeFiles/sorting-demo_run.dir/src/main.cpp.o: CMakeFiles/sorting-demo_run.dir/flags.make
 CMakeFiles/sorting-demo_run.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/sorting-demo_run.dir/src/main.cpp.o: CMakeFiles/sorting-demo_run.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/sorting-demo_run.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sorting-demo_run.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sorting-demo_run.dir/src/main.cpp.o -MF CMakeFiles/sorting-demo_run.dir/src/main.cpp.o.d -o CMakeFiles/sorting-demo_run.dir/src/main.cpp.o -c /home/jesper/dev/cpp/cpp-sorting/src/main.cpp
 
 CMakeFiles/sorting-demo_run.dir/src/main.cpp.i: cmake_force
@@ -83,30 +97,16 @@ CMakeFiles/sorting-demo_run.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sorting-demo_run.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jesper/dev/cpp/cpp-sorting/src/main.cpp -o CMakeFiles/sorting-demo_run.dir/src/main.cpp.s
 
-CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o: CMakeFiles/sorting-demo_run.dir/flags.make
-CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o: ../src/sorting.cpp
-CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o: CMakeFiles/sorting-demo_run.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o -MF CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o.d -o CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o -c /home/jesper/dev/cpp/cpp-sorting/src/sorting.cpp
-
-CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/jesper/dev/cpp/cpp-sorting/src/sorting.cpp > CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.i
-
-CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/jesper/dev/cpp/cpp-sorting/src/sorting.cpp -o CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.s
-
 # Object files for target sorting-demo_run
 sorting__demo_run_OBJECTS = \
-"CMakeFiles/sorting-demo_run.dir/src/main.cpp.o" \
-"CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o"
+"CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o" \
+"CMakeFiles/sorting-demo_run.dir/src/main.cpp.o"
 
 # External object files for target sorting-demo_run
 sorting__demo_run_EXTERNAL_OBJECTS =
 
+sorting-demo_run: CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o
 sorting-demo_run: CMakeFiles/sorting-demo_run.dir/src/main.cpp.o
-sorting-demo_run: CMakeFiles/sorting-demo_run.dir/src/sorting.cpp.o
 sorting-demo_run: CMakeFiles/sorting-demo_run.dir/build.make
 sorting-demo_run: CMakeFiles/sorting-demo_run.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable sorting-demo_run"
