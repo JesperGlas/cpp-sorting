@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/sorting-demo_tst.dir/tst_main.cpp.o.d"
   "sorting-demo_tst"
   "sorting-demo_tst.pdb"
+  "sorting-demo_tst[1]_tests.cmake"
 )
 
 # Per-language clean rules from dependency scanning.

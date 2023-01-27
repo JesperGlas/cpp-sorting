@@ -1,72 +1,19 @@
 #include "LinkedList.hpp"
 
-void LinkedList::append(int value)
+/* ### CORE ### */
+LinkedList::~LinkedList()
 {
-	Node *node = new Node(value);
-	if (this->_size == 0)
+	Node *current = this->_head;
+	Node *next = nullptr;
+	while (current != nullptr)
 	{
-		this->_head = node;
-		this->_tail = node;
-	}
-	else
-	{
-		node->_prev = this->_tail;
-		this->_tail->_next = node;
-		this->_tail = node;
-	}
-	this->_size++;
-	return;
-}
-
-void LinkedList::push(int value)
-{
-	if (this->_size == 0)
-		this->append(value);
-	else
-	{
-		Node *node = new Node(value);
-		node->_next = this->_head;
-		this->_head->_prev = node;
-		this->_head = node;
-		this->_size++;
+		next = current->_next;
+		delete current;
+		current = next;
 	}
 }
 
-int LinkedList::pop()
-{
-	// check that list contains elements
-	if (this->_size < 1)
-	{
-		std::clog << "Warning! Popping from empty list!" << std::endl;
-		return -1;
-	}
-	// update list
-	Node *tmp = this->_head;
-	this->_head = tmp->_next;
-	this->_head->_prev = nullptr;
-	this->_size--;
-
-	// clean up memory
-	int value = tmp->_data;
-	delete tmp;
-
-	return value;
-}
-
-int LinkedList::pull()
-{
-	// check that list contains elements
-	if (this->_size < 1)
-	{
-		std::clog << "Warning! Pulling from empty list!" << std::endl;
-		return -1;
-	}
-	// update list
-	Node *tmp = this->_tail;
-	this->_tail;
-	return -1;
-}
-
+/* ### PRIVATE ### */
 void LinkedList::swap(Node *a, Node *b)
 {
 	// insert a
@@ -99,16 +46,207 @@ void LinkedList::swap(Node *a, Node *b)
 
 	return;
 }
-Node * LinkedList::getNode(size_t index)
+
+Node * LinkedList::atIndex(size_t index)
 {
+	if (index < 0 || index >= this->_size)
+	{
+		std::cerr << "[Index Error]: Index out of bounds!" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+	Node *current = this->_head;
+	for (size_t i = 0; i < this->_size; i++)
+		current = current->_next;
+
+	return current;
+}
+
+/* ### PUBLIC ### */
+int LinkedList::head()
+{
+	if (this->_head == nullptr)
+	{
+		std::clog << "Warning! Requesting HEAD of empty list, returning -1." << std::endl;
+		return -1;
+	}
+	return this->_head->_data;
+}
+
+int LinkedList::tail()
+{
+	if (this->_tail == nullptr)
+	{
+		std::clog << "Warning! Requesting TAIL of empty list, returning -1." << std::endl;
+		return -1;
+	}
+	return this->_tail->_data;
+}
+
+int LinkedList::get(size_t index)
+{
+	// handle empty list
+	if (this->_size < 0)
+	{
+		std::clog << "Warning! Requesting element of empty list, returning -1." << std::endl;
+		return -1;
+	}
+
+	// handle negative index
+	if (index < 0)
+	{
+		std::clog << "Warning! Negative index, returning HEAD." << std::endl;
+		return this->head();
+	}
+
+	// handle index out of bounds
 	if (index >= this->_size)
 	{
-		return this->_tail;
+		std::clog << "Warning! Index out of bounds, returning TAIL." << std::endl;
+		return this->tail();
 	}
+
 	Node *current = this->_head;
-	for (size_t i = 0; i < index; i++)
+	for (size_t i = 0; i < this->_size; i++)
 		current = current->_next;
-	return current;
+
+	return current->_data;
+}
+
+void LinkedList::append(int value)
+{
+	Node *node = new Node(value);
+	if (this->_size == 0)
+	{
+		this->_head = node;
+		this->_tail = node;
+	}
+	else
+	{
+		node->_prev = this->_tail;
+		this->_tail->_next = node;
+		this->_tail = node;
+	}
+	this->_size++;
+	return;
+}
+
+void LinkedList::append(int values[], size_t n)
+{
+	for (size_t i = 0; i < n; i++)
+		this->append(values[i]);
+	return;
+}
+
+void LinkedList::push(int value)
+{
+	// handle empty list
+	if (this->_size == 0)
+		return this->append(value);
+
+	Node *node = new Node(value);
+	this->_head->_prev = node;
+	node->_next = this->_head;
+	this->_head = node;
+	this->_size++;
+	return;
+}
+
+void LinkedList::push(int values[], size_t n)
+{
+	for (size_t i = 0; i < n; i++)
+	{
+		size_t idx = n-1-i;
+		this->push(values[idx]);
+	}
+	return;
+}
+
+int LinkedList::pop()
+{
+	// handle empty list
+	if (this->_size <= 0)
+	{
+		std::clog << "Warning! Popping from empty list! Returning -1." << std::endl;
+		return -1;
+	}
+
+	// update list
+	Node *tmp = this->_head;
+	if (this->_size == 1)
+		this->_head = this->_tail = nullptr;
+	else
+	{
+		this->_head = tmp->_next;
+		this->_head->_prev = nullptr;
+	}
+	this->_size--;
+
+	// free memory
+	int data = tmp->_data;
+	delete tmp;
+
+	return data;
+}
+
+int LinkedList::popTail()
+{
+	// handle empty list
+	if (this->_size <= 0)
+	{
+		std::clog << "Warning! Popping from empty list! Returning -1." << std::endl;
+		return -1;
+	}
+
+	// update list
+	Node *tmp = this->_tail;
+	if (this->_size == 1)
+		this->_tail = this->_head = nullptr;
+	else
+	{
+		this->_tail = tmp->_prev;
+		this->_tail->_next = nullptr;
+	}
+	this->_size--;
+
+	// free memory
+	int data = tmp->_data;
+	delete tmp;
+
+	return data;
+}
+
+int LinkedList::pop(size_t index)
+{
+	// handle single element or empty list
+	if (this->_size <= 1)
+		return this->pop();
+
+	// handle negative index
+	if (index < 0)
+	{
+		std::clog << "Warning! Negative index, returning HEAD!" << std::endl;
+		return this->pop();
+	}
+
+	// handle index out of bounds
+	if (index >= this->_size)
+	{
+		std::clog << "WARNING! Index out of bounds, returning TAIL!" << std::endl;
+		return this->popTail();
+	}
+
+	// update list
+	Node *tmp= this->_head;
+	for (size_t i = 0; i <= index; i++)
+		tmp = tmp->_next;
+	tmp->_prev->_next = tmp->_next;
+	tmp->_next->_prev = tmp->_prev;
+
+	// free memory and return
+	int data = tmp->_data;
+	delete tmp;
+	return data;
 }
 
 int LinkedList::sort_ins()

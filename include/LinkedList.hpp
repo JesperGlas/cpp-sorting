@@ -10,22 +10,34 @@ private:
 	Node *_head;
 	Node *_tail;
 	size_t _size;
+
+	Node *atIndex(size_t index);
+	void swap(Node *a, Node *b);
 public:	
 	LinkedList() : _head(nullptr), _tail(nullptr), _size(0) {};
+	~LinkedList();
+	
+	// core
+	int head();
+	int tail();
+	int get(size_t index);
 	void append(int value);
+	void append(int values[], size_t n);
 	void push(int value);
+	void push(int values[], size_t n);
 	int pop();
-	int pull();
-	void swap(Node *a, Node *b);
-	Node *getNode(size_t index);
+	int popTail();
+	int pop(size_t index);
 
+	// sorting
 	int sort_ins();
 
-	inline size_t getSize() {return this->_size;};
-	inline void swapAtIdx(size_t i, size_t j)
+	// simple
+	inline size_t size() {return this->_size;};
+	inline void swap(size_t i, size_t j)
 	{
-		Node *a = this->getNode(i);
-		Node *b = this->getNode(j);
+		Node *a = this->atIndex(i);
+		Node *b = this->atIndex(j);
 		this->swap(a, b);
 		return;
 	};
