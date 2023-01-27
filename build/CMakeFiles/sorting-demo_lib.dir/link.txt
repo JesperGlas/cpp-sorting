@@ -1,0 +1,2 @@
+/usr/bin/ar qc libsorting-demo_lib.a CMakeFiles/sorting-demo_lib.dir/src/LinkedList.cpp.o CMakeFiles/sorting-demo_lib.dir/src/main.cpp.o
+/usr/bin/ranlib libsorting-demo_lib.a

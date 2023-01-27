@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jesper/dev/cpp/cpp-sorting/build/CMakeFiles /home/jesper/dev/cpp/cpp-sorting/build//CMakeFiles/progress.marks
@@ -129,12 +174,91 @@ sorting-demo_run/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/build
 .PHONY : sorting-demo_run/fast
 
+#=============================================================================
+# Target rules for targets named sorting-demo_lib
+
+# Build rule for target.
+sorting-demo_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sorting-demo_lib
+.PHONY : sorting-demo_lib
+
+# fast build rule for target.
+sorting-demo_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/build
+.PHONY : sorting-demo_lib/fast
+
+#=============================================================================
+# Target rules for targets named sorting-demo_tst
+
+# Build rule for target.
+sorting-demo_tst: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sorting-demo_tst
+.PHONY : sorting-demo_tst
+
+# fast build rule for target.
+sorting-demo_tst/fast:
+	$(MAKE) $(MAKESILENT) -f tst/CMakeFiles/sorting-demo_tst.dir/build.make tst/CMakeFiles/sorting-demo_tst.dir/build
+.PHONY : sorting-demo_tst/fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/build.make _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/build
+.PHONY : gmock/fast
+
+#=============================================================================
+# Target rules for targets named gmock_main
+
+# Build rule for target.
+gmock_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gmock_main
+.PHONY : gmock_main
+
+# fast build rule for target.
+gmock_main/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/build.make _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/build
+.PHONY : gmock_main/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/googletest-build/googletest/CMakeFiles/gtest.dir/build.make _deps/googletest-build/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build.make _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
 src/LinkedList.o: src/LinkedList.cpp.o
 .PHONY : src/LinkedList.o
 
 # target to build an object file
 src/LinkedList.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/src/LinkedList.cpp.o
 .PHONY : src/LinkedList.cpp.o
 
 src/LinkedList.i: src/LinkedList.cpp.i
@@ -143,6 +267,7 @@ src/LinkedList.i: src/LinkedList.cpp.i
 # target to preprocess a source file
 src/LinkedList.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/src/LinkedList.cpp.i
 .PHONY : src/LinkedList.cpp.i
 
 src/LinkedList.s: src/LinkedList.cpp.s
@@ -151,6 +276,7 @@ src/LinkedList.s: src/LinkedList.cpp.s
 # target to generate assembly for a file
 src/LinkedList.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/LinkedList.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/src/LinkedList.cpp.s
 .PHONY : src/LinkedList.cpp.s
 
 src/main.o: src/main.cpp.o
@@ -159,6 +285,7 @@ src/main.o: src/main.cpp.o
 # target to build an object file
 src/main.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -167,6 +294,7 @@ src/main.i: src/main.cpp.i
 # target to preprocess a source file
 src/main.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -175,6 +303,7 @@ src/main.s: src/main.cpp.s
 # target to generate assembly for a file
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_run.dir/build.make CMakeFiles/sorting-demo_run.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sorting-demo_lib.dir/build.make CMakeFiles/sorting-demo_lib.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -184,8 +313,18 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... gmock"
+	@echo "... gmock_main"
+	@echo "... gtest"
+	@echo "... gtest_main"
+	@echo "... sorting-demo_lib"
 	@echo "... sorting-demo_run"
+	@echo "... sorting-demo_tst"
 	@echo "... src/LinkedList.o"
 	@echo "... src/LinkedList.i"
 	@echo "... src/LinkedList.s"

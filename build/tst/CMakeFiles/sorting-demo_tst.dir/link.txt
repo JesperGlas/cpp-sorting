@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/sorting-demo_tst.dir/tst_main.cpp.o CMakeFiles/sorting-demo_tst.dir/tst_LinkedList.cpp.o -o sorting-demo_tst  ../libsorting-demo_lib.a ../lib/libgtest.a 

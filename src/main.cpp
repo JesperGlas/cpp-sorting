@@ -1,4 +1,15 @@
-#include "sorting.hpp"
+#include <iostream>
+#include <random>
+
+#include "LinkedList.hpp"
+
+int getRandom(int min, int max)
+{
+	std::random_device dev;
+	std::mt19937 rng(dev());
+	std::uniform_int_distribution<std::mt19937::result_type> distMinMax(min, max);
+	return distMinMax(rng);
+}
 
 void printArray(int arr[], size_t n)
 {
@@ -16,20 +27,27 @@ int main()
 {
 	std::cout << "Sorting demo!" << std::endl;
 	
-	// define original array
-	int arr1[] = {1, 2, 4, 1, 5, 3, 6, 8, 4, 3};
-	size_t size = sizeof(arr1) / sizeof(arr1[0]);
-	std::cout << "Original array: ";
-	printArray(arr1, size);
+	LinkedList lst = LinkedList();
+	size_t size = static_cast<int>(getRandom(1, 20));
+	for (size_t i = 0; i < size; i++)
+		lst.append(getRandom(1, 99));
+	std::cout << "List: (" << lst.getSize() << "): " << lst << std::endl;
 	
-	// insertion sort array
-	int arr2[size];
-	Sorting::insertion_copy(arr1, size, arr2);
-	std::cout << "Sorted array: ";
-	printArray(arr2, size);
+	// get at index
+	std::cout << "At index 0: " << (*lst.getNode(0)) << std::endl;
+	std::cout << "At index 3: " << (*lst.getNode(3)) << std::endl;
 
-	// make sure original is unmodified
-	std::clog << "Original array: ";
-	printArray(arr1, size);
+	// sort
+	lst.sort_ins();
+	std::cout << "Sorted: " << lst << std::endl;
+
+	// push
+	lst.push(100);
+	std::cout << "Pushed 100: " << lst << std::endl;
+
+	// pop
+	std::cout << "Pop first elem (" << lst.pop() << "): " << lst << std::endl;
+
+	// empty list by popping
 }
 
