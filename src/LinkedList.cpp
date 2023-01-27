@@ -86,7 +86,7 @@ int LinkedList::tail()
 int LinkedList::get(size_t index)
 {
 	// handle empty list
-	if (this->_size < 0)
+	if (this->_size <= 0)
 	{
 		std::clog << "Warning! Requesting element of empty list, returning -1." << std::endl;
 		return -1;
@@ -107,7 +107,7 @@ int LinkedList::get(size_t index)
 	}
 
 	Node *current = this->_head;
-	for (size_t i = 0; i < this->_size; i++)
+	for (size_t i = 0; i < index; i++)
 		current = current->_next;
 
 	return current->_data;
@@ -238,10 +238,11 @@ int LinkedList::pop(size_t index)
 
 	// update list
 	Node *tmp= this->_head;
-	for (size_t i = 0; i <= index; i++)
+	for (size_t i = 0; i < index; i++)
 		tmp = tmp->_next;
 	tmp->_prev->_next = tmp->_next;
 	tmp->_next->_prev = tmp->_prev;
+	this->_size--;
 
 	// free memory and return
 	int data = tmp->_data;
