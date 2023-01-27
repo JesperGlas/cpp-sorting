@@ -133,6 +133,23 @@ TEST(LinkedListTests, getTest)
 	EXPECT_EQ(lst.get(2), 3);
 }
 
+TEST(LinkedListTests, isSortedTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	size_t n = 5;
+	int values[n] = {1, 2, 4, 6, 3};
+	lst.append(values, n);
+
+	// test list is not sorted
+	EXPECT_FALSE(lst.isSorted());
+
+	// test list sorted
+	lst.popTail();
+	// [1, 2, 4, 6]
+	EXPECT_TRUE(lst.isSorted());
+}
+
 TEST(LinkedListTests, sortInsertionTest)
 {
 	// init list
@@ -140,12 +157,125 @@ TEST(LinkedListTests, sortInsertionTest)
 	size_t n = 10;
 	int values[n] = {3, 2, 5, 1, 7, 0, 8, 9, 4, 6};
 	lst.append(values, n);
+
+	// check that list is not sorted
+	EXPECT_FALSE(lst.isSorted());
 	
 	// sort list
 	lst.sort_ins();
+
+	// make sure list is sorted using member function
+	EXPECT_TRUE(lst.isSorted());
 
 	// make sure following values are equal or lower
 	for (size_t i = 1; i < lst.size(); i++)
 		EXPECT_TRUE(lst.get(i-1) <= lst.get(i));	
 }
 
+TEST(LinkedListTests, midNodeAppendPopTailTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	lst.append(3);
+	// [-3-]
+	EXPECT_EQ(lst.mid(), 3);
+	lst.append(4);
+	// [-3-, 4]
+	EXPECT_EQ(lst.mid(), 3);
+	lst.append(5);
+	// [3, -4-, 5]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.append(6);
+	// [3, -4-, 5, 6]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.append(7);
+	// [3, 4, -5-, 6, 7]
+	EXPECT_EQ(lst.mid(), 5);
+	lst.popTail();
+	// [3, -4-, 5, 6]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.popTail();
+	// [3, -4-, 5]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.popTail();
+	// [-3-, 4]
+	EXPECT_EQ(lst.mid(), 3);
+	lst.popTail();
+	// [-3-]
+	EXPECT_EQ(lst.mid(), 3);
+	// [ ]
+	lst.popTail();
+	EXPECT_EQ(lst.mid(), -1);
+}
+
+TEST(LinkedListTests, midNodePushPopTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	lst.push(7);
+	// [-7-]
+	EXPECT_EQ(lst.mid(), 7);
+	lst.push(6);
+	// [-6-, 7]
+	EXPECT_EQ(lst.mid(), 6);
+	lst.push(5);
+	// [5, -6-, 7]
+	EXPECT_EQ(lst.mid(), 6);
+	lst.push(4);
+	// [4, -5-, 6, 7]
+	EXPECT_EQ(lst.mid(), 5);
+	lst.push(3);
+	// [3, 4, -5-, 6, 7]
+	EXPECT_EQ(lst.mid(), 5);
+	lst.push(2);
+	// [2, 3, -4-, 5, 6, 7]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.push(1);
+	// [1, 2, 3, -4-, 5, 6, 7]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.pop();
+	// [2, 3, -4-, 5, 6, 7]
+	EXPECT_EQ(lst.mid(), 4);
+	lst.pop();
+	// [3, 4, -5-, 6, 7]
+	EXPECT_EQ(lst.mid(), 5);
+	lst.pop();
+	// [4, -5-, 6, 7]
+	EXPECT_EQ(lst.mid(), 5);
+	lst.pop();
+	// [5, -6-, 7]
+	EXPECT_EQ(lst.mid(), 6);
+	lst.pop();
+	// [-6-, 7]
+	EXPECT_EQ(lst.mid(), 6);
+	lst.pop();
+	// [-7-]
+	EXPECT_EQ(lst.mid(), 7);
+	lst.pop();
+	// [ ]
+	EXPECT_EQ(lst.mid(), -1);
+}
+
+TEST(LinkedListTests, midNodeExtTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	lst.append(5);
+	// [-5-]
+	EXPECT_EQ(lst.mid(), 5);
+
+	size_t n = 5;
+	int appValues[n] = {6, 7, 8, 9, 10};
+	int pushValues[n] = {0, 1, 2, 3, 4};
+	lst.append(appValues, n);
+	// [5, 6, -7-, 8, 9, 10]
+	EXPECT_EQ(lst.size(), 6);
+	EXPECT_EQ(lst.mid(), 7);
+	lst.push(pushValues, n);
+	// [0, 1, 2, 3, 4, -5-, 6, 7, 8, 9, 10]
+	EXPECT_EQ(lst.size(), 11);
+	EXPECT_EQ(lst.mid(), 5);
+	EXPECT_EQ(lst.pop(5), 5);
+	// [0, 1, 2, 3, -4-, 6, 7, 8, 9, 10]
+	EXPECT_EQ(lst.mid(), 4);
+}

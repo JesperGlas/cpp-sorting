@@ -83,6 +83,16 @@ int LinkedList::tail()
 	return this->_tail->_data;
 }
 
+int LinkedList::mid()
+{
+	if (this->_mid == nullptr)
+	{
+		std::clog << "Warning! Requesting MID of empty list, returning -1." << std::endl;
+		return -1;
+	}
+	return this->_mid->_data;
+}
+
 int LinkedList::get(size_t index)
 {
 	// handle empty list
@@ -113,6 +123,16 @@ int LinkedList::get(size_t index)
 	return current->_data;
 }
 
+bool LinkedList::isSorted()
+{
+	for (size_t i = 1; i < this->_size; i++)
+	{
+		if (this->get(i-1) > this->get(i))
+			return false;
+	}
+	return true;
+}
+
 void LinkedList::append(int value)
 {
 	Node *node = new Node(value);
@@ -120,6 +140,7 @@ void LinkedList::append(int value)
 	{
 		this->_head = node;
 		this->_tail = node;
+		this->_mid = node;
 	}
 	else
 	{
@@ -127,15 +148,19 @@ void LinkedList::append(int value)
 		this->_tail->_next = node;
 		this->_tail = node;
 	}
+
+	// update size
 	this->_size++;
-	return;
+	
+	// update mid node
+	if ( (this->_size > 1) && (this->_size % 2 == 1) )
+		this->_mid = this->_mid->_next;
 }
 
 void LinkedList::append(int values[], size_t n)
 {
 	for (size_t i = 0; i < n; i++)
 		this->append(values[i]);
-	return;
 }
 
 void LinkedList::push(int value)
@@ -148,8 +173,13 @@ void LinkedList::push(int value)
 	this->_head->_prev = node;
 	node->_next = this->_head;
 	this->_head = node;
+
+	// update size
 	this->_size++;
-	return;
+
+	// update mid node
+	if ((this->_size > 1) && (this->_size%2 == 0))
+		this->_mid = this->_mid->_prev;
 }
 
 void LinkedList::push(int values[], size_t n)
@@ -174,13 +204,21 @@ int LinkedList::pop()
 	// update list
 	Node *tmp = this->_head;
 	if (this->_size == 1)
-		this->_head = this->_tail = nullptr;
+		this->_head = this->_tail = this->_mid = nullptr;
 	else
 	{
 		this->_head = tmp->_next;
 		this->_head->_prev = nullptr;
 	}
+
+	// update size
 	this->_size--;
+
+	// update mid node
+	if (this->_size > 1 && this->_size%2 == 1)
+		this->_mid = this->_mid->_next;
+	else if (this->_size == 1)
+		this->_mid = tmp->_next;
 
 	// free memory
 	int data = tmp->_data;
@@ -201,13 +239,19 @@ int LinkedList::popTail()
 	// update list
 	Node *tmp = this->_tail;
 	if (this->_size == 1)
-		this->_tail = this->_head = nullptr;
+		this->_tail = this->_head = this->_mid = nullptr;
 	else
 	{
 		this->_tail = tmp->_prev;
 		this->_tail->_next = nullptr;
 	}
+
+	// update size
 	this->_size--;
+
+	// update mid node
+	if ( (this->_size > 1) && (this->_size%2 == 0))
+		this->_mid = this->_mid->_prev;
 
 	// free memory
 	int data = tmp->_data;
@@ -242,6 +286,14 @@ int LinkedList::pop(size_t index)
 		tmp = tmp->_next;
 	tmp->_prev->_next = tmp->_next;
 	tmp->_next->_prev = tmp->_prev;
+
+	// update mid node
+	if (this->_mid == tmp)
+		this->_mid = tmp->_prev;
+	else
+		this->_mid = this->_mid->_prev;
+
+	// update size
 	this->_size--;
 
 	// free memory and return
