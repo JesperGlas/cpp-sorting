@@ -28,9 +28,11 @@ public:
 	void append(int values[], size_t n);
 	void push(int value);
 	void push(int values[], size_t n);
+	void insert(int value, size_t index);
 	int pop();
 	int popTail();
 	int pop(size_t index);
+	void split(LinkedList &head, LinkedList &tail);
 
 	// sorting
 	int sort_ins();

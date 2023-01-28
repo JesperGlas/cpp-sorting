@@ -189,7 +189,34 @@ void LinkedList::push(int values[], size_t n)
 		size_t idx = n-1-i;
 		this->push(values[idx]);
 	}
-	return;
+}
+
+void LinkedList::insert(int value, size_t index)
+{
+	if (index < 1 || this->_size < 1)
+		return this->push(value);
+	if (index >= this->_size)
+		return this->append(value);
+
+	// gather data
+	Node *tmp = new Node(value);
+	Node *next = this->atIndex(index);
+	Node *prev = next->_prev;
+
+	// update list
+	prev->_next = tmp;
+	next->_prev = tmp;
+	tmp->_next = next;
+	tmp->_prev = prev;
+
+	// update size
+	this->_size++;
+
+	// update mid node
+	if (index <= this->_size/2)
+		this->_mid = this->_mid->_next;
+	else
+		this->_mid = this->_mid->_prev;
 }
 
 int LinkedList::pop()
@@ -300,6 +327,24 @@ int LinkedList::pop(size_t index)
 	int data = tmp->_data;
 	delete tmp;
 	return data;
+}
+
+void LinkedList::split(LinkedList &head, LinkedList &tail)
+{
+	// populate head
+	Node *current = this->_head;
+	while (current != this->_mid->_next)
+	{
+		head.append(current->_data);
+		current = current->_next;
+	}
+
+	// populate tail
+	while (current != nullptr)
+	{
+		tail.append(current->_data);
+		current = current->_next;
+	}
 }
 
 int LinkedList::sort_ins()

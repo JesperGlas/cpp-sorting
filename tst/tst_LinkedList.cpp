@@ -279,3 +279,55 @@ TEST(LinkedListTests, midNodeExtTest)
 	// [0, 1, 2, 3, -4-, 6, 7, 8, 9, 10]
 	EXPECT_EQ(lst.mid(), 4);
 }
+
+TEST(LinkedListTests, insertTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	size_t n = 5;
+	int values[n] = {1, 2, 3, 4, 5};
+
+	lst.append(values, n);
+	// [1, 2, -3-, 4, 5]
+	EXPECT_EQ(lst.head(), 1);
+	EXPECT_EQ(lst.mid(), 3);
+	EXPECT_EQ(lst.tail(), 5);
+
+	lst.insert(0, 0);
+	// [0, 1, -2-, 3, 4, 5]
+	EXPECT_EQ(lst.head(), 0);
+	EXPECT_EQ(lst.tail(), 5);
+	EXPECT_EQ(lst.mid(), 2);
+	
+	lst.insert(6, 6);
+	// [0, 1, 2, -3-, 4, 5, 6]
+	EXPECT_EQ(lst.head(), 0);
+	EXPECT_EQ(lst.tail(), 6);
+	EXPECT_EQ(lst.mid(), 3);
+}
+
+TEST(LinkedListTests, splitTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	size_t n = 10;
+	int values[n] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	lst.append(values, n);
+	// [0, 1, 2, 3, -4-, 5, 6, 7, 8, 9]
+	EXPECT_EQ(lst.size(), 10);
+
+	// split
+	LinkedList head = LinkedList();
+	LinkedList tail = LinkedList();
+	lst.split(head, tail);
+	// head = [0, 1, -2-, 3, 4]
+	EXPECT_EQ(head.size(), 5);
+	EXPECT_EQ(head.head(), 0);
+	EXPECT_EQ(head.tail(), 4);
+	EXPECT_EQ(head.mid(), 2);
+	// tail = [5, 6, -7-, 8, 9]
+	EXPECT_EQ(tail.size(), 5);
+	EXPECT_EQ(tail.head(), 5);
+	EXPECT_EQ(tail.tail(), 9);
+	EXPECT_EQ(tail.mid(), 7);
+}
