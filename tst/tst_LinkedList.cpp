@@ -52,6 +52,30 @@ TEST(LinkedListTests, appendMultipleTest)
 	EXPECT_EQ(lst.tail(), 5);
 }
 
+TEST(LinkedListTests, indexOperatorTest)
+{
+	// init list
+	LinkedList lst = LinkedList();
+	size_t n = 5;
+	int values[n] = {0, 1, 2, 3, 4};
+	lst.append(values, n);
+	EXPECT_EQ(lst.size(), 5);
+
+	// get values
+	EXPECT_EQ(lst[0], 0);
+	EXPECT_EQ(lst[4], 4);
+	
+	// change values
+	int tmp = lst[0];
+	lst[0] = lst[4];
+	lst[4] = lst[2];
+	lst[2] = tmp;
+	// [4, 1, 0, 3, 2]
+	EXPECT_EQ(lst.head(), 4);
+	EXPECT_EQ(lst.tail(), 2);
+	EXPECT_EQ(lst.mid(), 0);
+}
+
 TEST(LinkedListTests, pushTest)
 {
 	// init list

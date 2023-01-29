@@ -347,11 +347,25 @@ void LinkedList::split(LinkedList &head, LinkedList &tail)
 	}
 }
 
+int & LinkedList::operator[](size_t index)
+{
+	if (this->_size <= index || index < 0)
+		throw std::out_of_range("Index out of range.");
+
+	Node *current = this->_head;
+	for (size_t i = 0; i < index; i++)
+		current = current->_next;
+
+	return current->_data;
+}
+
 int LinkedList::sort_ins()
 {
+	int count = 0; // keeps track of loops for sorting
 	Node *current = this->_head;
 	while (current != this->_tail)
 	{
+		count++; // increment count
 		if (current->_data <= current->_next->_data)
 		{
 			current = current->_next;
@@ -367,7 +381,7 @@ int LinkedList::sort_ins()
 				current = b->_prev;
 		}
 	}
-	return 1;
+	return count;
 }
 
 std::ostream & operator<<(std::ostream &os, const LinkedList &list)
@@ -388,4 +402,3 @@ std::ostream & operator<<(std::ostream &os, const LinkedList &list)
 	}
 	return os;
 }
-
