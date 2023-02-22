@@ -1,5 +1,5 @@
 # cpp-sorting
-Learning project for various sorting algorithms.
+Learning project for the implementations of various data structures and ways of sorting them.
 
 ## Linked List
 ### Description
